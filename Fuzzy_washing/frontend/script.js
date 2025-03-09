@@ -3,18 +3,15 @@ async function calculateFuzzy() {
   const load = document.getElementById("load_size").value;
   const water = document.getElementById("water_temperature").value;
 
-  const response = await fetch(
-    "https://fuzzy-washing-backend.onrender.com/calculate",
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        dirt_level: dirt,
-        load_size: load,
-        water_temperature: water,
-      }),
-    }
-  );
+  const response = await fetch("https://fuzzy-washing-backend.onrender.com/", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      dirt_level: dirt,
+      load_size: load,
+      water_temperature: water,
+    }),
+  });
   const data = await response.json();
 
   document.getElementById(
