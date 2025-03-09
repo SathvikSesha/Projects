@@ -1,21 +1,24 @@
-async function calculateFuzzy() {
-  const dirt = document.getElementById("dirt_level").value;
-  const load = document.getElementById("load_size").value;
-  const water = document.getElementById("water_temperature").value;
+document.getElementById("calculate-btn").addEventListener("click", function () {
+  let dirt = document.getElementById("dirt-level").value;
+  let load = document.getElementById("load-size").value;
+  let temp = document.getElementById("water-temp").value;
 
-  const response = await fetch("https://fuzzy-washing-backend.onrender.com/", {
+  fetch("https://fuzzy-washing-backend.onrender.com/calculate", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({
       dirt_level: dirt,
       load_size: load,
-      water_temperature: water,
+      water_temperature: temp,
     }),
-  });
-  const data = await response.json();
-
-  document.getElementById(
-    "result"
-  ).innerHTML = `Washing Time: <strong>${data.washing_time}</strong> mins<br> 
-         Detergent Quantity: <strong>${data.detergent_quantity}</strong> ml`;
-}
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      document.getElementById(
+        "result"
+      ).innerHTML = `Washing Time: ${data.washing_time} min <br> Detergent: ${data.detergent_quantity} ml`;
+    })
+    .catch((error) => console.error("Error:", error));
+});
