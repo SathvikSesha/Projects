@@ -70,22 +70,34 @@ rules = [
 washing_ctrl = ctrl.ControlSystem(rules)
 washing_sim = ctrl.ControlSystemSimulation(washing_ctrl)
 
+@app.route('/')
+def home():
+    return "Fuzzy Washing Backend is Running!", 200
+
 @app.route('/calculate', methods=['POST'])
 def calculate():
-    data = request.json
-    dirt_input = float(data['dirt_level'])
-    load_input = float(data['load_size'])
-    water_input = float(data['water_temperature'])
+    try:
+        data = request.json
+        dirt_input = float(data.get('dirt_level', 0))
+        load_input = float(data.get('load_size', 0))
+        water_input = float(data.get('water_temperature', 20))  # Default 20°C if not provided
 
-    washing_sim.input['dirt_level'] = dirt_input
-    washing_sim.input['load_size'] = load_input
-    washing_sim.input['water_temperature'] = water_input
-    washing_sim.compute()
+        # Validate input ranges
+        if not (0 <= dirt_input <= 100 and 0 <= load_input <= 10 and 20 <= water_input <= 80):
+            return jsonify({'error': 'Invalid input values'}), 400
 
-    return jsonify({
-        'washing_time': round(washing_sim.output['washing_time'], 2),
-        'detergent_quantity': round(washing_sim.output['detergent_quantity'], 2)
-    })
+        washing_sim.input['dirt_level'] = dirt_input
+        washing_sim.input['load_size'] = load_input
+        washing_sim.input['water_temperature'] = water_input
+        washing_sim.compute()
+
+        return jsonify({
+            'washing_time': round(washing_sim.output['washing_time'], 2),
+            'detergent_quantity': round(washing_sim.output['detergent_quantity'], 2)
+        })
+    
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
