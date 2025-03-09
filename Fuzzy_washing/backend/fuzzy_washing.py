@@ -3,10 +3,14 @@ import skfuzzy as fuzz
 import skfuzzy.control as ctrl
 import numpy as np
 from flask_cors import CORS
-import os
 
 app = Flask(__name__)
 CORS(app)  # Enable Cross-Origin Resource Sharing
+
+# Home route to prevent 404 errors
+@app.route('/')
+def home():
+    return "Fuzzy Washing Machine API is running!"
 
 # Define input variables
 dirt_level = ctrl.Antecedent(np.arange(0, 101, 1), 'dirt_level')
@@ -88,7 +92,5 @@ def calculate():
         'detergent_quantity': round(washing_sim.output['detergent_quantity'], 2)
     })
 
-# Ensure the app runs on the correct port for Render
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 10000))  # Default to 10000 if PORT is not set
-    app.run(host='0.0.0.0', port=port, debug=True)
+    app.run(debug=True)
