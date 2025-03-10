@@ -2,12 +2,26 @@ function calculateFuzzy() {
   let dirt = document.getElementById("dirt_level").value;
   let load = document.getElementById("load_size").value;
   let temp = document.getElementById("water_temperature").value;
+  let resultDiv = document.getElementById("result");
 
-  if (dirt === "" || load === "" || temp === "") {
-    document.getElementById("result").innerHTML =
-      "<span class='text-red-500'>Please fill all fields.</span>";
+  if (!dirt || !load || !temp) {
+    resultDiv.innerHTML =
+      "<p class='text-red-500'>Please enter all fields.</p>";
     return;
   }
+  if (
+    dirt < 0 ||
+    dirt > 100 ||
+    load < 0 ||
+    load > 10 ||
+    temp < 20 ||
+    temp > 80
+  ) {
+    resultDiv.innerHTML = "<p class='text-red-500'>Invalid input values.</p>";
+    return;
+  }
+
+  resultDiv.innerHTML = "<p class='text-blue-500'>Calculating...</p>"; // Show loading message
 
   fetch("https://fuzzy-washing-backend.onrender.com/calculate", {
     method: "POST",
