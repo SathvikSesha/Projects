@@ -42,8 +42,8 @@ function calculateFuzzy() {
     })
     .then((data) => {
       document.getElementById("result").innerHTML = `
-            <p class="text-green-600">Washing Time: <b>${data.washing_time} min</b></p>
-            <p class="text-blue-600">Detergent Quantity: <b>${data.detergent_quantity} ml</b></p>
+            <p class="text-green-600">Washing Time : <b>${data.washing_time} min</b></p>
+            <p class="text-blue-600">Detergent Quantity : <b>${data.detergent_quantity} ml</b></p>
         `;
     })
     .catch((error) => {
