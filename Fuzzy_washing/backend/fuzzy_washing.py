@@ -42,48 +42,47 @@ rules = [
     ctrl.Rule(dirt_level['low'] & load_size['small'] & water_temperature['high'], (washing_time['short'], detergent_quantity['low'])),
     ctrl.Rule(dirt_level['low'] & load_size['medium'] & water_temperature['high'], (washing_time['short'], detergent_quantity['medium'])),
     ctrl.Rule(dirt_level['low'] & load_size['large'] & water_temperature['high'], (washing_time['medium'], detergent_quantity['medium'])),
-    ctrl.Rule(dirt_level['medium'] & load_size['small'] & water_temperature['high'], (washing_time['short'], detergent_quantity['medium'])),
-    ctrl.Rule(dirt_level['medium'] & load_size['medium'] & water_temperature['high'], (washing_time['short'], detergent_quantity['medium'])),
-    ctrl.Rule(dirt_level['medium'] & load_size['large'] & water_temperature['high'], (washing_time['medium'], detergent_quantity['medium'])),
-    ctrl.Rule(dirt_level['high'] & load_size['small'] & water_temperature['high'], (washing_time['medium'], detergent_quantity['medium'])),
-    ctrl.Rule(dirt_level['high'] & load_size['medium'] & water_temperature['high'], (washing_time['medium'], detergent_quantity['high'])),
-    ctrl.Rule(dirt_level['high'] & load_size['large'] & water_temperature['high'], (washing_time['long'], detergent_quantity['high'])),
-    ctrl.Rule(dirt_level['low'] & load_size['small'] & water_temperature['medium'], (washing_time['short'], detergent_quantity['low'])),
-    ctrl.Rule(dirt_level['low'] & load_size['medium'] & water_temperature['medium'], (washing_time['short'], detergent_quantity['medium'])),
-    ctrl.Rule(dirt_level['low'] & load_size['large'] & water_temperature['medium'], (washing_time['medium'], detergent_quantity['medium'])),
-    ctrl.Rule(dirt_level['medium'] & load_size['small'] & water_temperature['medium'], (washing_time['short'], detergent_quantity['medium'])),
-    ctrl.Rule(dirt_level['medium'] & load_size['medium'] & water_temperature['medium'], (washing_time['short'], detergent_quantity['medium'])),
-    ctrl.Rule(dirt_level['medium'] & load_size['large'] & water_temperature['medium'], (washing_time['medium'], detergent_quantity['medium'])),
-    ctrl.Rule(dirt_level['high'] & load_size['small'] & water_temperature['low'], (washing_time['medium'], detergent_quantity['medium'])),
-    ctrl.Rule(dirt_level['high'] & load_size['medium'] & water_temperature['low'], (washing_time['long'], detergent_quantity['high'])),
-    ctrl.Rule(dirt_level['high'] & load_size['large'] & water_temperature['low'], (washing_time['long'], detergent_quantity['high'])),
     ctrl.Rule(dirt_level['low'] & load_size['small'] & water_temperature['low'], (washing_time['short'], detergent_quantity['low'])),
     ctrl.Rule(dirt_level['low'] & load_size['medium'] & water_temperature['low'], (washing_time['medium'], detergent_quantity['medium'])),
     ctrl.Rule(dirt_level['low'] & load_size['large'] & water_temperature['low'], (washing_time['medium'], detergent_quantity['medium'])),
-    ctrl.Rule(dirt_level['medium'] & load_size['small'] & water_temperature['low'], (washing_time['medium'], detergent_quantity['low'])),
+    ctrl.Rule(dirt_level['low'] & load_size['small'] & water_temperature['medium'], (washing_time['short'], detergent_quantity['low'])),
+    ctrl.Rule(dirt_level['low'] & load_size['medium'] & water_temperature['medium'], (washing_time['short'], detergent_quantity['medium'])),
+    ctrl.Rule(dirt_level['low'] & load_size['large'] & water_temperature['medium'], (washing_time['medium'], detergent_quantity['medium'])),
+     ctrl.Rule(dirt_level['medium'] & load_size['small'] & water_temperature['low'], (washing_time['medium'], detergent_quantity['low'])),
     ctrl.Rule(dirt_level['medium'] & load_size['medium'] & water_temperature['low'], (washing_time['medium'], detergent_quantity['medium'])),
-    ctrl.Rule(dirt_level['medium'] & load_size['large'] & water_temperature['low'], (washing_time['long'], detergent_quantity['medium']))
+    ctrl.Rule(dirt_level['medium'] & load_size['large'] & water_temperature['low'], (washing_time['long'], detergent_quantity['medium'])),
+    ctrl.Rule(dirt_level['medium'] & load_size['small'] & water_temperature['high'], (washing_time['short'], detergent_quantity['medium'])),
+    ctrl.Rule(dirt_level['medium'] & load_size['medium'] & water_temperature['high'], (washing_time['short'], detergent_quantity['medium'])),
+    ctrl.Rule(dirt_level['medium'] & load_size['large'] & water_temperature['high'], (washing_time['medium'], detergent_quantity['medium'])),
+    ctrl.Rule(dirt_level['medium'] & load_size['small'] & water_temperature['medium'], (washing_time['short'], detergent_quantity['medium'])),
+    ctrl.Rule(dirt_level['medium'] & load_size['medium'] & water_temperature['medium'], (washing_time['short'], detergent_quantity['medium'])),
+    ctrl.Rule(dirt_level['medium'] & load_size['large'] & water_temperature['medium'], (washing_time['medium'], detergent_quantity['medium'])),
+    ctrl.Rule(dirt_level['high'] & load_size['small'] & water_temperature['high'], (washing_time['medium'], detergent_quantity['medium'])),
+    ctrl.Rule(dirt_level['high'] & load_size['medium'] & water_temperature['high'], (washing_time['medium'], detergent_quantity['high'])),
+    ctrl.Rule(dirt_level['high'] & load_size['large'] & water_temperature['high'], (washing_time['long'], detergent_quantity['high'])),
+    ctrl.Rule(dirt_level['high'] & load_size['small'] & water_temperature['low'], (washing_time['medium'], detergent_quantity['medium'])),
+    ctrl.Rule(dirt_level['high'] & load_size['medium'] & water_temperature['low'], (washing_time['long'], detergent_quantity['high'])),
+    ctrl.Rule(dirt_level['high'] & load_size['large'] & water_temperature['low'], (washing_time['long'], detergent_quantity['high'])),
+    ctrl.Rule(dirt_level['high'] & load_size['small'] & water_temperature['medium'], (washing_time['medium'], detergent_quantity['medium'])),
+    ctrl.Rule(dirt_level['high'] & load_size['medium'] & water_temperature['medium'], (washing_time['long'], detergent_quantity['high'])),
+    ctrl.Rule(dirt_level['high'] & load_size['large'] & water_temperature['medium'], (washing_time['long'], detergent_quantity['high']))
 ]
 
 washing_ctrl = ctrl.ControlSystem(rules)
 washing_sim = ctrl.ControlSystemSimulation(washing_ctrl)
-
 @app.route('/calculate', methods=['POST'])
 def calculate():
     data = request.json
     dirt_input = float(data['dirt_level'])
     load_input = float(data['load_size'])
     water_input = float(data['water_temperature'])
-
     washing_sim.input['dirt_level'] = dirt_input
     washing_sim.input['load_size'] = load_input
     washing_sim.input['water_temperature'] = water_input
     washing_sim.compute()
-
     return jsonify({
         'washing_time': round(washing_sim.output['washing_time'], 2),
         'detergent_quantity': round(washing_sim.output['detergent_quantity'], 2)
     })
-
 if __name__ == '__main__':
     app.run(debug=True)
