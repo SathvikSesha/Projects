@@ -21,7 +21,7 @@ function calculateFuzzy() {
     return;
   }
 
-  resultDiv.innerHTML = "<p class='text-blue-500'>Calculating...</p>"; // Show loading message
+  resultDiv.innerHTML = "<p class='text-blue-500'>Calculating...</p>";
 
   fetch("https://fuzzy-washing-backend.onrender.com/calculate", {
     method: "POST",
