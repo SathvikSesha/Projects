@@ -1,0 +1,82 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-image: url(backs.jpg);
+    text-align: center;
+}
+.container{
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.game{
+    height: 60vmin;
+    width: 60vmin;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    justify-content: center;
+    align-items: center;
+}
+.box{
+    height: calc(100% / 3);
+    width: calc(100% / 3);
+    border: 1.5px solid black;
+    box-shadow: 4px 13px 8px 1px rgba(0,0,0,0.2),14px 6px 8px 1px rgba(0,0,0,0.19);
+    font-size: 9vmin;
+    background-color: #F8FFE5;
+    color: black;
+    cursor:pointer;
+}
+.box:hover{
+    background-color: #f4fddbcb;
+}
+#reset{
+    width: 150px;
+    height: 50px;
+    border-radius: 48px;
+    border: 1px solid black;
+    box-shadow: 5px 3px 5px 0 rgba(0,0,0,0.75) inset,4px 6px 5px 0 rgba(0,0,0,0.19);
+    background-color: #864848;
+    font-size: large;
+    color: aliceblue;
+    font-weight: 600;
+    font-family: 'Inknut Antiqua';
+}
+#reset:hover{
+    font-size: 20px;
+}
+#win{
+    height: 450px;
+    width: 650px;
+    color: rgb(85, 54, 54);
+    font-size: 40px;
+    font-weight: 600;
+    display:none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 20px;
+    box-shadow: 4px 8px 5px 0 rgba(63, 1, 1,0.2) inset,3px 14px 10px 0 rgb(51, 1, 1,0.45);
+    padding-top: 130px;
+    box-sizing: border-box;
+    backdrop-filter: blur(10px);
+}
+#again{
+    height: 40px;
+    width: 60%;
+    margin: 20px;
+    background-color: rgb(121, 187, 244);
+    color: white;
+    font-size: 20px;
+    border-radius: 85px;
+    border: 1.5px solid black;
+}
+#again:hover{
+   font-size: 21px;
+   background-color: rgb(105, 181, 247);
+}
