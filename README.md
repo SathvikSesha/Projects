@@ -81,28 +81,11 @@ io	In-memory file handling for graph return as image
 Install with:
 pip install flask flask-cors scikit-fuzzy numpy matplotlib
 
-📊 Graph Visualization
-Run this to see a popup graph in VS Code:
-
-bash
-Copy
-Edit
-python plot_fuzzy_results.py
-This will generate:
-
-Dirt Level vs Washing Time
-
-Load Size vs Detergent Quantity
-
-The backend also supports a /graph POST API that returns this as a PNG.
-
 🔌 API Endpoints
 POST /calculate
 Request:
 
 json
-Copy
-Edit
 {
   "dirt_level": 70,
   "load_size": 5,
@@ -111,8 +94,6 @@ Edit
 Response:
 
 json
-Copy
-Edit
 {
   "washing_time": 67.42,
   "detergent_quantity": 139.28
@@ -121,8 +102,6 @@ POST /graph
 Request:
 
 json
-Copy
-Edit
 {
   "inputs": [
     { "dirt_level": 20, "load_size": 2, "water_temperature": 40 },
@@ -154,12 +133,7 @@ Optional: Graph is displayed to visualize system behavior
 Add your screenshots here if available
 
 📽️ Demo Video
-🎬 YouTube Walkthrough
-
-🔗 Important Links
-🔴 Live Site: https://fuzzy-washing.netlify.app
-
-📁 GitHub Repo: Add your repo link here
+🎬 YouTube Walkthrough:https://youtu.be/3hMkBXa0-rc?si=3uFKQlKLHhT9776V
 
 🌱 Future Enhancements
 Add support for cloth type (cotton, silk, wool)
