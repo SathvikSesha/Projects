@@ -146,7 +146,8 @@ Convert app to Progressive Web App (PWA)
 
 Voice-based input and IoT integration
 
-Thank you for exploring our fuzzy-powered smart washing system! 🌟
+Thank you for exploring our fuzzy-powered smart washing system! 🌟<br>
+Here are some other basic projects i made:
  <a href="https://sathviksesha.github.io/Projects/tic-tac-toe/">tic-tac-toe</a><br>
  <a href="https://sathviksesha.github.io/Projects/rock-Paper-Scissors/">Rock-Paper-Scissors</a><br>
 
