@@ -1,0 +1,81 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+    background-color: bisque;
+    font-size: 14px;
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.calculator{
+    background-color: antiquewhite;
+    height: 65vh;
+    width: 25vw;
+    border: 3px solid black;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    box-shadow: 0px 0px 18px 16px rgba(0,0,0,0.1);
+}
+.display{
+    padding: 5px;
+    margin: 10px;
+    height: 50px;
+    width: 90%;
+    border: 2px solid black;
+    border-radius: 5px;
+    box-shadow: 
+  inset 5px 5px 8px rgba(0, 0, 0, 0.1),   
+  inset -5px -5px 8px rgba(0, 0, 0, 0.1),  
+  inset -5px 5px 8px rgba(0, 0, 0, 0.1),   
+  inset 5px -5px 8px rgba(0, 0, 0, 0.1);  
+    font-size: 30px;
+    letter-spacing: 3px;
+    display: flex;
+    align-items: center;
+    
+}
+.numbers{
+    height: 250px;
+    width: 90%;
+    margin: 20px 10px 10px 10px;
+    padding: 5px;
+     border: 2px solid black;
+    border-radius: 5px;
+    box-shadow: 
+  inset 5px 5px 8px rgba(0, 0, 0, 0.1),   
+  inset -5px -5px 8px rgba(0, 0, 0, 0.1),  
+  inset -5px 5px 8px rgba(0, 0, 0, 0.1),   
+  inset 5px -5px 8px rgba(0, 0, 0, 0.1); 
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+.numbers .num {
+    width: 65px;
+    height: 45px;
+    border: 2px solid black;
+    border-radius: 3px;
+    font-size: 18px;
+    font-weight: 600;
+    color: rgb(74, 7, 7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    letter-spacing: 2px;
+}
+
+.numbers .num:hover {
+   background-color: aliceblue;
+   cursor: pointer;
+}
+.numbers .num:active {
+   background-color: rgb(211, 234, 255);
+   cursor: pointer;
+}
