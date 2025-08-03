@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        .head {
+            text-align: center;
+            font-weight: 700;
+            font-size: 50px;
+            margin-bottom: 30px;
+        }
+
+        .form-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        input[type="text"],
+        input[type="date"] {
+            height: 45px;
+            padding: 0 10px;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 250px;
+            box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1),
+                inset -2px -2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="text"]:hover,
+        input[type="date"]:hover {
+            border: 1.5px solid #007bff;
+        }
+
+        button {
+            height: 45px;
+            width: 80px;
+            border: none;
+            border-radius: 5px;
+            background-color: rgb(254, 2, 2);
+            color: white;
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background-color: rgb(155, 163, 249);
+            color: black;
+        }
+
+        button:active {
+            background-color: rgb(123, 134, 254);
+        }
+
+        .task-list {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .task-item {
+            background-color: white;
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border-left: 5px solid #007bff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .task-date {
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="head">Todo App</div>
+
+    <div class="form-container">
+        <input type="text" id="taskInput" placeholder="" required />
+        <input type="date" id="dateInput" required />
+        <button id="addBtn">Add</button>
+    </div>
+
+    <div class="task-list" id="taskList"></div>
+
+    <script>
+        const taskInput = document.getElementById('taskInput');
+        const dateInput = document.getElementById('dateInput');
+        const addBtn = document.getElementById('addBtn');
+        const taskList = document.getElementById('taskList');
+        const placeholderText = "Make your task here";
+        let index = 0;
+        let typing = true;
+        const typeEffect = () => {
+            if (typing) {
+                if (index < placeholderText.length) {
+                    taskInput.placeholder += placeholderText[index];
+                    index++;
+                } else {
+                    typing = false;
+                    setTimeout(() => {
+                        taskInput.placeholder = "";
+                        index = 0;
+                        typing = true;
+                    }, 3000);
+                }
+            }
+        };
+        setInterval(typeEffect, 100);
+        addBtn.addEventListener('click', () => {
+            const taskText = taskInput.value.trim();
+            const taskDate = dateInput.value;
+
+            if (taskText === "") {
+                alert("Please enter a task!");
+                return;
+            }
+
+            const taskDiv = document.createElement('div');
+            taskDiv.classList.add('task-item');
+            const taskInfo = document.createElement('div');
+            taskInfo.innerText = taskText;
+            const dateSpan = document.createElement('div');
+            dateSpan.classList.add('task-date');
+            dateSpan.innerText = taskDate;
+            const rightSection = document.createElement('div');
+            rightSection.style.display = "flex";
+            rightSection.style.alignItems = "center";
+            rightSection.style.gap = "10px";
+            rightSection.appendChild(dateSpan);
+            const deleteBtn = document.createElement('button');
+            deleteBtn.textContent = '🗑️';
+            deleteBtn.style.border = 'none';
+            deleteBtn.style.background = 'transparent';
+            deleteBtn.style.cursor = 'pointer';
+            deleteBtn.style.fontSize = '18px';
+            deleteBtn.title = 'Delete this task';
+
+            deleteBtn.addEventListener('click', () => {
+                taskDiv.remove();
+            });
+
+            rightSection.appendChild(deleteBtn);
+            taskDiv.appendChild(taskInfo);
+            taskDiv.appendChild(rightSection);
+            taskList.appendChild(taskDiv);
+            taskInput.value = '';
+            dateInput.value = '';
+        });
+
+
+    </script>
+</body>
+
+</html>
